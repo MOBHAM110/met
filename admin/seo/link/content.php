@@ -1,0 +1,20 @@
+<?php
+$depth='../';
+require_once $depth.'../login/login_check.php';
+if($action=='editor'){
+	$link_list=$db->get_one("select * from $met_link where id='$id'");
+	if(!$link_list){
+		metsave('-1',$lang_dataerror,$depth);
+	}
+	$link_type[$link_list[link_type]]="checked";
+	$link_lang[$link_list[link_lang]]="checked";
+	$show_ok1=$link_list[show_ok]?"checked":"";
+	$com_ok1=$link_list[com_ok]?"checked":"";
+}else{
+	$link_list[weburl]="http://";
+}
+$css_url=$depth."../templates/".$met_skin."/css";
+$img_url=$depth."../templates/".$met_skin."/images";
+include template('seo/link/link_content');
+footer();
+?>
